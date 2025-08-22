@@ -1,0 +1,35 @@
+{
+  "name": "finapp",
+  "version": "1.0.0",
+  "description": "Personal Finance Management Application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "node --watch ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterlee42/FinApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/peterlee42/FinApp/issues"
+  },
+  "homepage": "https://github.com/peterlee42/FinApp#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^5.2.3",
+    "eslint": "^9.33.0",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
+  }
+}
