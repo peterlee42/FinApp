@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
@@ -5,15 +6,9 @@ const app = express();
 // ----------------------------------------------------------------
 
 app.use(express.json());
-app.use('morgan');
-app.use('dotenv');
+app.use(morgan);
 
-const PORT = 3000;
-
-app.get('/ping', (_req, res) => {
-  console.log('someone pinged here');
-  res.send('pong');
-});
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
