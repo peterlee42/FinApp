@@ -1,0 +1,7 @@
+# dependencies
+node_modules/
+dist/
+
+# configs & environment
+.env
+.eslint.config.mjs
