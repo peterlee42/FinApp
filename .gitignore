@@ -29,3 +29,5 @@ build/
 
 # Optional npm cache
 .npm
+
+/generated/prisma
