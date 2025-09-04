@@ -3,7 +3,7 @@ import { withAccelerate } from '@prisma/extension-accelerate';
 
 const prisma = new PrismaClient().$extends(withAccelerate());
 
-export async function signup(req, res) {
+const signup = async (req, res) => {
   const { name, email, posts } = req.body;
 
   const postData =
@@ -25,4 +25,6 @@ export async function signup(req, res) {
     console.error(error);
     res.status(500).json({ error: 'Failed to create user' });
   }
-}
+};
+
+export default { signup };

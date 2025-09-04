@@ -4,6 +4,6 @@ import usersRouter from './routes/usersRouter.js';
 const app = express();
 
 app.use(express.json());
-app.use(usersRouter);
+app.use('/api/users', usersRouter);
 
 export { app };
