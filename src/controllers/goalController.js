@@ -1,9 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-import { withAccelerate } from '@prisma/extension-accelerate';
+import { prisma } from '../db/prismaClient.js';
 
-const prisma = new PrismaClient().$extends(withAccelerate());
+/* CREATE SIMPLE TEXT GOAL */
 
-const signup = async (req, res) => {
+const createGoal = async (req, res) => {
   const { name, email, posts } = req.body;
 
   const postData =
@@ -21,10 +20,8 @@ const signup = async (req, res) => {
       },
     });
     res.json(result);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Failed to create user' });
   }
 };
-
-export default { signup };

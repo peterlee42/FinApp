@@ -1,0 +1,2 @@
+/services/ → business logic (heavy lifting, interacts with db). Controllers call services.
+Example: services/userService.js.

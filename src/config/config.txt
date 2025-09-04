@@ -1,0 +1,2 @@
+/config/ → app-level configuration files (e.g. Express settings, CORS, JWT secrets, logger config, mail config).
+Example: config/cors.js, config/logger.js.

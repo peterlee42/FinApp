@@ -1,0 +1,2 @@
+/utils/ → helper functions (e.g. formatDate, hashPassword, sendEmail).
+Example: utils/jwt.js.
