@@ -5,3 +5,6 @@ dist/
 # configs & environment
 .env
 .eslint.config.mjs
+
+# prisma
+prisma/
