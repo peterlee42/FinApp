@@ -55,13 +55,24 @@ const getUserById = async (req, res) => {
     if (user) {
       res.json(user);
     } else {
-      res.status(500).json({ error: 'user not found' });
+      res.status(404).json({ error: 'user not found' });
     }
   } catch (err) {
     res.json(err);
   }
 };
 
-const deleteUserById = async (req, res) => {};
+const deleteUserById = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    await prisma.user.delete({
+      where: {
+        id: userId,
+      },
+    });
+  } catch (err) {
+    res.json(err);
+  }
+};
 
-export default { signup, getAllUsers, getUserById };
+export default { signup, getAllUsers, getUserById, deleteUserById };
