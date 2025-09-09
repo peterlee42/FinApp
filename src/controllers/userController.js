@@ -1,20 +1,23 @@
 import { prisma } from '../db/prismaClient.js';
 
 const signup = async (req, res) => {
-  const { name, email, posts } = req.body;
+  const { name, email, goals } = req.body;
 
-  const postData =
-    posts?.map((post) => ({
-      title: post?.title,
-      content: post?.content,
+  // TODO Fix goal data
+  /*
+  const goalData =
+    goals?.map((goal) => ({
+      title: goal?.title,
+      content: goal?.content,
     })) || [];
-
+*/
+  const goalData = [];
   try {
     const result = await prisma.user.create({
       data: {
         name,
         email,
-        posts: postData.length > 0 ? { create: postData } : undefined,
+        goals: goalData.length > 0 ? { create: goalData } : undefined,
       },
     });
     res.json(result);

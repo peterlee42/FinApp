@@ -3,12 +3,20 @@ import { prisma } from '../db/prismaClient.js';
 /* CREATE SIMPLE TEXT GOAL */
 
 const createGoal = async (req, res) => {
-  const { name, target, current, deadline, notes, userId } = req.body;
+  const { name, notes } = req.body;
 
   try {
-    res.status(200);
+    const result = await prisma.goal.create({
+      data: {
+        name,
+        notes,
+      },
+    });
+    res.json(result);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to create user' });
+    res.status(500).json({ error: 'Failed to create goal' });
   }
 };
+
+export default { createGoal };
