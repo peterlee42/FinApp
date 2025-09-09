@@ -1,9 +1,10 @@
 import { prisma } from '../db/prismaClient.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const signup = async (req, res) => {
-  const { name, email, goals } = req.body;
+  const { name, email } = req.body;
 
-  // TODO Fix goal data
+  // TODO fix goals
   /*
   const goalData =
     goals?.map((goal) => ({
@@ -11,13 +12,16 @@ const signup = async (req, res) => {
       content: goal?.content,
     })) || [];
 */
-  const goalData = [];
+
+  const userID = uuidv4();
+  console.log(userID);
+
   try {
     const result = await prisma.user.create({
       data: {
+        id: 0,
         name,
         email,
-        goals: goalData.length > 0 ? { create: goalData } : undefined,
       },
     });
     res.json(result);
@@ -31,7 +35,6 @@ const getAllUsers = async (_, res) => {
   try {
     const users = await prisma.user.findMany({
       select: {
-        id: true,
         name: true,
         email: true,
       },
@@ -45,10 +48,10 @@ const getAllUsers = async (_, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
+    const userID = req.params.id;
 
     const user = await prisma.user.findUnique({
-      where: { id },
+      where: { userID },
       select: {
         name: true,
         email: true,
@@ -67,10 +70,10 @@ const getUserById = async (req, res) => {
 
 const deleteUserById = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const userID = req.params.id;
     await prisma.user.delete({
       where: {
-        id: userId,
+        id: userID,
       },
     });
   } catch (err) {

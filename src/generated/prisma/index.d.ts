@@ -942,36 +942,6 @@ export namespace Prisma {
    */
 
 
-  /**
-   * Count Type UserCountOutputType
-   */
-
-  export type UserCountOutputType = {
-    goals: number
-  }
-
-  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    goals?: boolean | UserCountOutputTypeCountGoalsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserCountOutputType
-     */
-    select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountGoalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GoalWhereInput
-  }
-
 
   /**
    * Models
@@ -1101,7 +1071,7 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: string
     email: string
-    name: string | null
+    name: string
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1125,8 +1095,6 @@ export namespace Prisma {
     id?: boolean
     email?: boolean
     name?: boolean
-    goals?: boolean | User$goalsArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1148,22 +1116,14 @@ export namespace Prisma {
   }
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name", ExtArgs["result"]["user"]>
-  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    goals?: boolean | User$goalsArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
-    objects: {
-      goals: Prisma.$GoalPayload<ExtArgs>[]
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
-      name: string | null
+      name: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1558,7 +1518,6 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    goals<T extends User$goalsArgs<ExtArgs> = {}>(args?: Subset<T, User$goalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1608,10 +1567,6 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1630,10 +1585,6 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1651,10 +1602,6 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -1704,10 +1651,6 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -1756,10 +1699,6 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput
@@ -1802,10 +1741,6 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to create a User.
      */
@@ -1854,10 +1789,6 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to update a User.
      */
@@ -1925,10 +1856,6 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -1955,10 +1882,6 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput
@@ -1979,30 +1902,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.goals
-   */
-  export type User$goalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Goal
-     */
-    select?: GoalSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Goal
-     */
-    omit?: GoalOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
-    where?: GoalWhereInput
-    orderBy?: GoalOrderByWithRelationInput | GoalOrderByWithRelationInput[]
-    cursor?: GoalWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: GoalScalarFieldEnum | GoalScalarFieldEnum[]
-  }
-
-  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2014,10 +1913,6 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
   }
 
 
@@ -2052,7 +1947,6 @@ export namespace Prisma {
     current: Decimal | null
     deadline: Date | null
     notes: string | null
-    userId: string | null
   }
 
   export type GoalMaxAggregateOutputType = {
@@ -2064,7 +1958,6 @@ export namespace Prisma {
     current: Decimal | null
     deadline: Date | null
     notes: string | null
-    userId: string | null
   }
 
   export type GoalCountAggregateOutputType = {
@@ -2076,7 +1969,6 @@ export namespace Prisma {
     current: number
     deadline: number
     notes: number
-    userId: number
     _all: number
   }
 
@@ -2100,7 +1992,6 @@ export namespace Prisma {
     current?: true
     deadline?: true
     notes?: true
-    userId?: true
   }
 
   export type GoalMaxAggregateInputType = {
@@ -2112,7 +2003,6 @@ export namespace Prisma {
     current?: true
     deadline?: true
     notes?: true
-    userId?: true
   }
 
   export type GoalCountAggregateInputType = {
@@ -2124,7 +2014,6 @@ export namespace Prisma {
     current?: true
     deadline?: true
     notes?: true
-    userId?: true
     _all?: true
   }
 
@@ -2223,7 +2112,6 @@ export namespace Prisma {
     current: Decimal | null
     deadline: Date | null
     notes: string
-    userId: string | null
     _count: GoalCountAggregateOutputType | null
     _avg: GoalAvgAggregateOutputType | null
     _sum: GoalSumAggregateOutputType | null
@@ -2254,8 +2142,6 @@ export namespace Prisma {
     current?: boolean
     deadline?: boolean
     notes?: boolean
-    userId?: boolean
-    user?: boolean | Goal$userArgs<ExtArgs>
   }, ExtArgs["result"]["goal"]>
 
   export type GoalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2267,8 +2153,6 @@ export namespace Prisma {
     current?: boolean
     deadline?: boolean
     notes?: boolean
-    userId?: boolean
-    user?: boolean | Goal$userArgs<ExtArgs>
   }, ExtArgs["result"]["goal"]>
 
   export type GoalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2280,8 +2164,6 @@ export namespace Prisma {
     current?: boolean
     deadline?: boolean
     notes?: boolean
-    userId?: boolean
-    user?: boolean | Goal$userArgs<ExtArgs>
   }, ExtArgs["result"]["goal"]>
 
   export type GoalSelectScalar = {
@@ -2293,25 +2175,13 @@ export namespace Prisma {
     current?: boolean
     deadline?: boolean
     notes?: boolean
-    userId?: boolean
   }
 
-  export type GoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "name" | "target" | "current" | "deadline" | "notes" | "userId", ExtArgs["result"]["goal"]>
-  export type GoalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Goal$userArgs<ExtArgs>
-  }
-  export type GoalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Goal$userArgs<ExtArgs>
-  }
-  export type GoalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Goal$userArgs<ExtArgs>
-  }
+  export type GoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "name" | "target" | "current" | "deadline" | "notes", ExtArgs["result"]["goal"]>
 
   export type $GoalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Goal"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
       createdAt: Date
@@ -2321,7 +2191,6 @@ export namespace Prisma {
       current: Prisma.Decimal | null
       deadline: Date | null
       notes: string
-      userId: string | null
     }, ExtArgs["result"]["goal"]>
     composites: {}
   }
@@ -2716,7 +2585,6 @@ export namespace Prisma {
    */
   export interface Prisma__GoalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends Goal$userArgs<ExtArgs> = {}>(args?: Subset<T, Goal$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2754,7 +2622,6 @@ export namespace Prisma {
     readonly current: FieldRef<"Goal", 'Decimal'>
     readonly deadline: FieldRef<"Goal", 'DateTime'>
     readonly notes: FieldRef<"Goal", 'String'>
-    readonly userId: FieldRef<"Goal", 'String'>
   }
     
 
@@ -2771,10 +2638,6 @@ export namespace Prisma {
      * Omit specific fields from the Goal
      */
     omit?: GoalOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
     /**
      * Filter, which Goal to fetch.
      */
@@ -2794,10 +2657,6 @@ export namespace Prisma {
      */
     omit?: GoalOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
-    /**
      * Filter, which Goal to fetch.
      */
     where: GoalWhereUniqueInput
@@ -2815,10 +2674,6 @@ export namespace Prisma {
      * Omit specific fields from the Goal
      */
     omit?: GoalOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
     /**
      * Filter, which Goal to fetch.
      */
@@ -2868,10 +2723,6 @@ export namespace Prisma {
      */
     omit?: GoalOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
-    /**
      * Filter, which Goal to fetch.
      */
     where?: GoalWhereInput
@@ -2920,10 +2771,6 @@ export namespace Prisma {
      */
     omit?: GoalOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
-    /**
      * Filter, which Goals to fetch.
      */
     where?: GoalWhereInput
@@ -2967,10 +2814,6 @@ export namespace Prisma {
      */
     omit?: GoalOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
-    /**
      * The data needed to create a Goal.
      */
     data: XOR<GoalCreateInput, GoalUncheckedCreateInput>
@@ -3004,10 +2847,6 @@ export namespace Prisma {
      */
     data: GoalCreateManyInput | GoalCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3022,10 +2861,6 @@ export namespace Prisma {
      * Omit specific fields from the Goal
      */
     omit?: GoalOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
     /**
      * The data needed to update a Goal.
      */
@@ -3078,10 +2913,6 @@ export namespace Prisma {
      * Limit how many Goals to update.
      */
     limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3096,10 +2927,6 @@ export namespace Prisma {
      * Omit specific fields from the Goal
      */
     omit?: GoalOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
     /**
      * The filter to search for the Goal to update in case it exists.
      */
@@ -3127,10 +2954,6 @@ export namespace Prisma {
      */
     omit?: GoalOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
-    /**
      * Filter which Goal to delete.
      */
     where: GoalWhereUniqueInput
@@ -3151,25 +2974,6 @@ export namespace Prisma {
   }
 
   /**
-   * Goal.user
-   */
-  export type Goal$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
    * Goal without action
    */
   export type GoalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3181,10 +2985,6 @@ export namespace Prisma {
      * Omit specific fields from the Goal
      */
     omit?: GoalOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GoalInclude<ExtArgs> | null
   }
 
 
@@ -3219,8 +3019,7 @@ export namespace Prisma {
     target: 'target',
     current: 'current',
     deadline: 'deadline',
-    notes: 'notes',
-    userId: 'userId'
+    notes: 'notes'
   };
 
   export type GoalScalarFieldEnum = (typeof GoalScalarFieldEnum)[keyof typeof GoalScalarFieldEnum]
@@ -3320,15 +3119,13 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    name?: StringNullableFilter<"User"> | string | null
-    goals?: GoalListRelationFilter
+    name?: StringFilter<"User"> | string
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
-    name?: SortOrderInput | SortOrder
-    goals?: GoalOrderByRelationAggregateInput
+    name?: SortOrder
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -3337,14 +3134,13 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringNullableFilter<"User"> | string | null
-    goals?: GoalListRelationFilter
+    name?: StringFilter<"User"> | string
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
-    name?: SortOrderInput | SortOrder
+    name?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -3356,7 +3152,7 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
-    name?: StringNullableWithAggregatesFilter<"User"> | string | null
+    name?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type GoalWhereInput = {
@@ -3371,8 +3167,6 @@ export namespace Prisma {
     current?: DecimalNullableFilter<"Goal"> | Decimal | DecimalJsLike | number | string | null
     deadline?: DateTimeNullableFilter<"Goal"> | Date | string | null
     notes?: StringFilter<"Goal"> | string
-    userId?: StringNullableFilter<"Goal"> | string | null
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type GoalOrderByWithRelationInput = {
@@ -3384,8 +3178,6 @@ export namespace Prisma {
     current?: SortOrderInput | SortOrder
     deadline?: SortOrderInput | SortOrder
     notes?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
   }
 
   export type GoalWhereUniqueInput = Prisma.AtLeast<{
@@ -3400,8 +3192,6 @@ export namespace Prisma {
     current?: DecimalNullableFilter<"Goal"> | Decimal | DecimalJsLike | number | string | null
     deadline?: DateTimeNullableFilter<"Goal"> | Date | string | null
     notes?: StringFilter<"Goal"> | string
-    userId?: StringNullableFilter<"Goal"> | string | null
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type GoalOrderByWithAggregationInput = {
@@ -3413,7 +3203,6 @@ export namespace Prisma {
     current?: SortOrderInput | SortOrder
     deadline?: SortOrderInput | SortOrder
     notes?: SortOrder
-    userId?: SortOrderInput | SortOrder
     _count?: GoalCountOrderByAggregateInput
     _avg?: GoalAvgOrderByAggregateInput
     _max?: GoalMaxOrderByAggregateInput
@@ -3433,53 +3222,48 @@ export namespace Prisma {
     current?: DecimalNullableWithAggregatesFilter<"Goal"> | Decimal | DecimalJsLike | number | string | null
     deadline?: DateTimeNullableWithAggregatesFilter<"Goal"> | Date | string | null
     notes?: StringWithAggregatesFilter<"Goal"> | string
-    userId?: StringNullableWithAggregatesFilter<"Goal"> | string | null
   }
 
   export type UserCreateInput = {
     id?: string
     email: string
-    name?: string | null
-    goals?: GoalCreateNestedManyWithoutUserInput
+    name: string
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     email: string
-    name?: string | null
-    goals?: GoalUncheckedCreateNestedManyWithoutUserInput
+    name: string
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: GoalUpdateManyWithoutUserNestedInput
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    goals?: GoalUncheckedUpdateManyWithoutUserNestedInput
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateManyInput = {
     id?: string
     email: string
-    name?: string | null
+    name: string
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type GoalCreateInput = {
@@ -3491,7 +3275,6 @@ export namespace Prisma {
     current?: Decimal | DecimalJsLike | number | string | null
     deadline?: Date | string | null
     notes?: string
-    user?: UserCreateNestedOneWithoutGoalsInput
   }
 
   export type GoalUncheckedCreateInput = {
@@ -3503,7 +3286,6 @@ export namespace Prisma {
     current?: Decimal | DecimalJsLike | number | string | null
     deadline?: Date | string | null
     notes?: string
-    userId?: string | null
   }
 
   export type GoalUpdateInput = {
@@ -3515,7 +3297,6 @@ export namespace Prisma {
     current?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
-    user?: UserUpdateOneWithoutGoalsNestedInput
   }
 
   export type GoalUncheckedUpdateInput = {
@@ -3527,7 +3308,6 @@ export namespace Prisma {
     current?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GoalCreateManyInput = {
@@ -3539,7 +3319,6 @@ export namespace Prisma {
     current?: Decimal | DecimalJsLike | number | string | null
     deadline?: Date | string | null
     notes?: string
-    userId?: string | null
   }
 
   export type GoalUpdateManyMutationInput = {
@@ -3562,7 +3341,6 @@ export namespace Prisma {
     current?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3578,36 +3356,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type GoalListRelationFilter = {
-    every?: GoalWhereInput
-    some?: GoalWhereInput
-    none?: GoalWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type GoalOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -3646,24 +3394,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3697,9 +3427,9 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type GoalCountOrderByAggregateInput = {
@@ -3711,7 +3441,6 @@ export namespace Prisma {
     current?: SortOrder
     deadline?: SortOrder
     notes?: SortOrder
-    userId?: SortOrder
   }
 
   export type GoalAvgOrderByAggregateInput = {
@@ -3728,7 +3457,6 @@ export namespace Prisma {
     current?: SortOrder
     deadline?: SortOrder
     notes?: SortOrder
-    userId?: SortOrder
   }
 
   export type GoalMinOrderByAggregateInput = {
@@ -3740,7 +3468,6 @@ export namespace Prisma {
     current?: SortOrder
     deadline?: SortOrder
     notes?: SortOrder
-    userId?: SortOrder
   }
 
   export type GoalSumOrderByAggregateInput = {
@@ -3792,60 +3519,8 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type GoalCreateNestedManyWithoutUserInput = {
-    create?: XOR<GoalCreateWithoutUserInput, GoalUncheckedCreateWithoutUserInput> | GoalCreateWithoutUserInput[] | GoalUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GoalCreateOrConnectWithoutUserInput | GoalCreateOrConnectWithoutUserInput[]
-    createMany?: GoalCreateManyUserInputEnvelope
-    connect?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
-  }
-
-  export type GoalUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<GoalCreateWithoutUserInput, GoalUncheckedCreateWithoutUserInput> | GoalCreateWithoutUserInput[] | GoalUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GoalCreateOrConnectWithoutUserInput | GoalCreateOrConnectWithoutUserInput[]
-    createMany?: GoalCreateManyUserInputEnvelope
-    connect?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
-  export type GoalUpdateManyWithoutUserNestedInput = {
-    create?: XOR<GoalCreateWithoutUserInput, GoalUncheckedCreateWithoutUserInput> | GoalCreateWithoutUserInput[] | GoalUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GoalCreateOrConnectWithoutUserInput | GoalCreateOrConnectWithoutUserInput[]
-    upsert?: GoalUpsertWithWhereUniqueWithoutUserInput | GoalUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: GoalCreateManyUserInputEnvelope
-    set?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
-    disconnect?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
-    delete?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
-    connect?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
-    update?: GoalUpdateWithWhereUniqueWithoutUserInput | GoalUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: GoalUpdateManyWithWhereWithoutUserInput | GoalUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: GoalScalarWhereInput | GoalScalarWhereInput[]
-  }
-
-  export type GoalUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<GoalCreateWithoutUserInput, GoalUncheckedCreateWithoutUserInput> | GoalCreateWithoutUserInput[] | GoalUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GoalCreateOrConnectWithoutUserInput | GoalCreateOrConnectWithoutUserInput[]
-    upsert?: GoalUpsertWithWhereUniqueWithoutUserInput | GoalUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: GoalCreateManyUserInputEnvelope
-    set?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
-    disconnect?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
-    delete?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
-    connect?: GoalWhereUniqueInput | GoalWhereUniqueInput[]
-    update?: GoalUpdateWithWhereUniqueWithoutUserInput | GoalUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: GoalUpdateManyWithWhereWithoutUserInput | GoalUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: GoalScalarWhereInput | GoalScalarWhereInput[]
-  }
-
-  export type UserCreateNestedOneWithoutGoalsInput = {
-    create?: XOR<UserCreateWithoutGoalsInput, UserUncheckedCreateWithoutGoalsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutGoalsInput
-    connect?: UserWhereUniqueInput
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -3864,16 +3539,6 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type UserUpdateOneWithoutGoalsNestedInput = {
-    create?: XOR<UserCreateWithoutGoalsInput, UserUncheckedCreateWithoutGoalsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutGoalsInput
-    upsert?: UserUpsertWithoutGoalsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGoalsInput, UserUpdateWithoutGoalsInput>, UserUncheckedUpdateWithoutGoalsInput>
-  }
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -3886,20 +3551,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -3928,34 +3579,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -4021,6 +3644,17 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -4033,153 +3667,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type GoalCreateWithoutUserInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    name: string
-    target?: Decimal | DecimalJsLike | number | string | null
-    current?: Decimal | DecimalJsLike | number | string | null
-    deadline?: Date | string | null
-    notes?: string
-  }
-
-  export type GoalUncheckedCreateWithoutUserInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    name: string
-    target?: Decimal | DecimalJsLike | number | string | null
-    current?: Decimal | DecimalJsLike | number | string | null
-    deadline?: Date | string | null
-    notes?: string
-  }
-
-  export type GoalCreateOrConnectWithoutUserInput = {
-    where: GoalWhereUniqueInput
-    create: XOR<GoalCreateWithoutUserInput, GoalUncheckedCreateWithoutUserInput>
-  }
-
-  export type GoalCreateManyUserInputEnvelope = {
-    data: GoalCreateManyUserInput | GoalCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type GoalUpsertWithWhereUniqueWithoutUserInput = {
-    where: GoalWhereUniqueInput
-    update: XOR<GoalUpdateWithoutUserInput, GoalUncheckedUpdateWithoutUserInput>
-    create: XOR<GoalCreateWithoutUserInput, GoalUncheckedCreateWithoutUserInput>
-  }
-
-  export type GoalUpdateWithWhereUniqueWithoutUserInput = {
-    where: GoalWhereUniqueInput
-    data: XOR<GoalUpdateWithoutUserInput, GoalUncheckedUpdateWithoutUserInput>
-  }
-
-  export type GoalUpdateManyWithWhereWithoutUserInput = {
-    where: GoalScalarWhereInput
-    data: XOR<GoalUpdateManyMutationInput, GoalUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type GoalScalarWhereInput = {
-    AND?: GoalScalarWhereInput | GoalScalarWhereInput[]
-    OR?: GoalScalarWhereInput[]
-    NOT?: GoalScalarWhereInput | GoalScalarWhereInput[]
-    id?: StringFilter<"Goal"> | string
-    createdAt?: DateTimeFilter<"Goal"> | Date | string
-    updatedAt?: DateTimeFilter<"Goal"> | Date | string
-    name?: StringFilter<"Goal"> | string
-    target?: DecimalNullableFilter<"Goal"> | Decimal | DecimalJsLike | number | string | null
-    current?: DecimalNullableFilter<"Goal"> | Decimal | DecimalJsLike | number | string | null
-    deadline?: DateTimeNullableFilter<"Goal"> | Date | string | null
-    notes?: StringFilter<"Goal"> | string
-    userId?: StringNullableFilter<"Goal"> | string | null
-  }
-
-  export type UserCreateWithoutGoalsInput = {
-    id?: string
-    email: string
-    name?: string | null
-  }
-
-  export type UserUncheckedCreateWithoutGoalsInput = {
-    id?: string
-    email: string
-    name?: string | null
-  }
-
-  export type UserCreateOrConnectWithoutGoalsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutGoalsInput, UserUncheckedCreateWithoutGoalsInput>
-  }
-
-  export type UserUpsertWithoutGoalsInput = {
-    update: XOR<UserUpdateWithoutGoalsInput, UserUncheckedUpdateWithoutGoalsInput>
-    create: XOR<UserCreateWithoutGoalsInput, UserUncheckedCreateWithoutGoalsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutGoalsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutGoalsInput, UserUncheckedUpdateWithoutGoalsInput>
-  }
-
-  export type UserUpdateWithoutGoalsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UserUncheckedUpdateWithoutGoalsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type GoalCreateManyUserInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    name: string
-    target?: Decimal | DecimalJsLike | number | string | null
-    current?: Decimal | DecimalJsLike | number | string | null
-    deadline?: Date | string | null
-    notes?: string
-  }
-
-  export type GoalUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    current?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GoalUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    current?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GoalUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    current?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: StringFieldUpdateOperationsInput | string
   }
 
 

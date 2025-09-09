@@ -134,8 +134,7 @@ exports.Prisma.GoalScalarFieldEnum = {
   target: 'target',
   current: 'current',
   deadline: 'deadline',
-  notes: 'notes',
-  userId: 'userId'
+  notes: 'notes'
 };
 
 exports.Prisma.SortOrder = {

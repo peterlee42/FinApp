@@ -9,10 +9,9 @@ datasource db {
 }
 
 model User {
-  id    String  @id @default(uuid())
-  email String  @unique
-  name  String?
-  goals Goal[]
+  id    String @id @default(uuid())
+  email String @unique
+  name  String
 }
 
 model Goal {
@@ -24,6 +23,4 @@ model Goal {
   current   Decimal?
   deadline  DateTime?
   notes     String    @default("")
-  user      User?     @relation(fields: [userId], references: [id])
-  userId    String?
 }
