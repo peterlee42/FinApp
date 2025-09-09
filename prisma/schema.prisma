@@ -8,19 +8,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    String @id @default(uuid()) 
-  email String @unique
-  name  String
-}
-
 model Goal {
-  id        String    @id @default(uuid())
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  updatedAt DateTime
   name      String
   target    Decimal?
   current   Decimal?
   deadline  DateTime?
   notes     String    @default("")
+}
+
+model User {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email String @unique
+  name  String
 }

@@ -1,5 +1,4 @@
 import { prisma } from '../db/prismaClient.js';
-import { v4 as uuidv4 } from 'uuid';
 
 const signup = async (req, res) => {
   const { name, email } = req.body;
@@ -13,13 +12,9 @@ const signup = async (req, res) => {
     })) || [];
 */
 
-  const userID = uuidv4();
-  console.log(userID);
-
   try {
     const result = await prisma.user.create({
       data: {
-        id: 0,
         name,
         email,
       },
