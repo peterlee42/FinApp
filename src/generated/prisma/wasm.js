@@ -177,8 +177,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Goal {\n  id        String    @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  createdAt DateTime  @default(now())\n  updatedAt DateTime\n  name      String\n  target    Decimal?\n  current   Decimal?\n  deadline  DateTime?\n  notes     String    @default(\"\")\n}\n\nmodel User {\n  id    String @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  email String @unique\n  name  String\n}\n",
-  "inlineSchemaHash": "ba9f56c006d700b47e7fc3b377f009c226794c4886c3c380dd5fb4c6fcb20974",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Goal {\n  id        String    @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  createdAt DateTime  @default(now())\n  updatedAt DateTime?\n  name      String\n  target    Decimal?\n  current   Decimal?\n  deadline  DateTime?\n  notes     String    @default(\"\")\n}\n\nmodel User {\n  id    String @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  email String @unique\n  name  String\n}\n",
+  "inlineSchemaHash": "c76d29329543d475ea857aa0cddcf2be6cb7f72f6f9808015a09a8d56c927a8e",
   "copyEngine": true
 }
 config.dirname = '/'

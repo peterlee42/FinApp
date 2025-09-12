@@ -1,7 +1,5 @@
 import { prisma } from '../db/prismaClient.js';
 
-/* CREATE SIMPLE TEXT GOAL */
-
 const createGoal = async (req, res) => {
   const { name, notes } = req.body;
 

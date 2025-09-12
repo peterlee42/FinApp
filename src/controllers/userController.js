@@ -2,6 +2,16 @@ import { prisma } from '../db/prismaClient.js';
 
 const signup = async (req, res) => {
   const { name, email } = req.body;
+
+  const userExists = await prisma.user.findFirst({
+    where: { email },
+    select: { id: true },
+  });
+
+  if (userExists) {
+    return res.status(409).json({ error: 'User already exists' });
+  }
+
   try {
     const result = await prisma.user.create({
       data: {
