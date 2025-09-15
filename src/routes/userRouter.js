@@ -4,23 +4,14 @@ import express from 'express';
 const userRouter = express.Router();
 
 // get all users
-userRouter.get('/', async (req, res) => userController.getAllUsers(req, res));
+userRouter.get('/', userController.getAllUsers);
 
 // get one user
-userRouter.get(
-  '/:id',
-  async (req, res) => await userController.getUserById(req, res)
-);
+userRouter.get('/:id', userController.getUserById);
 
 // delete one user
-userRouter.delete(
-  '/:id',
-  async (req, res) => await userController.deleteUserById(req, res)
-);
+userRouter.delete('/:id', userController.deleteUserById);
 
-userRouter.post(
-  `/signup`,
-  async (req, res) => await userController.signup(req, res)
-);
+// TODO post to change user name and email.
 
 export default userRouter;

@@ -134,7 +134,19 @@ exports.Prisma.GoalScalarFieldEnum = {
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  name: 'name'
+  firstName: 'firstName',
+  lastName: 'lastName',
+  password: 'password',
+  phoneNumber: 'phoneNumber',
+  emailVerified: 'emailVerified',
+  phoneVerified: 'phoneVerified',
+  dateOfBirth: 'dateOfBirth',
+  address: 'address',
+  twoFASecret: 'twoFASecret',
+  failedLogins: 'failedLogins',
+  lastLogin: 'lastLogin',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {

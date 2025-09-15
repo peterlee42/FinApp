@@ -3,14 +3,8 @@ import express from 'express';
 
 const goalRouter = express.Router();
 
-goalRouter.post(
-  `/create`,
-  async (req, res) => await goalController.createGoal(req, res)
-);
+goalRouter.post(`/create`, goalController.createGoal);
 
-goalRouter.get(
-  '/create',
-  async (req, res) => await goalController.getAllGoals(req, res)
-);
+goalRouter.get('/', goalController.getAllGoals);
 
 export default goalRouter;

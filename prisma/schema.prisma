@@ -21,7 +21,21 @@ model Goal {
 }
 
 model User {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email String @unique
-  name  String
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email          String   @unique
+  firstName      String
+  lastName       String
+  password       String
+  phoneNumber    String?  @unique
+  emailVerified  Boolean  @default(false)
+  phoneVerified  Boolean  @default(false)
+  dateOfBirth    DateTime?
+  address        String?
+  twoFASecret    String?  
+  failedLogins   Int      @default(0)
+  lastLogin      DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("users")
 }
