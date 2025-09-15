@@ -1,5 +1,6 @@
 import { prisma } from '../db/prismaClient.js';
 
+// Signup User
 const signup = async (req, res) => {
   const { name, email } = req.body;
 
@@ -26,6 +27,7 @@ const signup = async (req, res) => {
   }
 };
 
+// Get all users
 const getAllUsers = async (_, res) => {
   try {
     const users = await prisma.user.findMany({
@@ -41,6 +43,7 @@ const getAllUsers = async (_, res) => {
   }
 };
 
+// Get user by ID
 const getUserById = async (req, res) => {
   try {
     const userID = req.params.id;
@@ -63,6 +66,7 @@ const getUserById = async (req, res) => {
   }
 };
 
+// Delete user by id
 const deleteUserById = async (req, res) => {
   try {
     const userID = req.params.id;

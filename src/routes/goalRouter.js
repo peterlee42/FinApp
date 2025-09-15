@@ -8,4 +8,9 @@ goalRouter.post(
   async (req, res) => await goalController.createGoal(req, res)
 );
 
+goalRouter.get(
+  '/create',
+  async (req, res) => await goalController.getAllGoals(req, res)
+);
+
 export default goalRouter;
