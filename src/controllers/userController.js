@@ -15,7 +15,12 @@ const createUser = async (req, res) => {
   }
 
   try {
-    const result = signupService({ email, password, firstName, lastName });
+    const result = await signupService({
+      email,
+      password,
+      firstName,
+      lastName,
+    });
     res.json(result);
   } catch (err) {
     console.error(err);
