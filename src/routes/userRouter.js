@@ -12,6 +12,4 @@ userRouter.get('/:id', userController.getUserById);
 // delete one user
 userRouter.delete('/:id', userController.deleteUserById);
 
-// TODO post to change user name and email.
-
 export default userRouter;
