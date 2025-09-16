@@ -3,7 +3,7 @@ import config from '../config/env.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const login = async (email, password) => {
+export const loginService = async (email, password) => {
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) throw new Error('Invalid credentials');
 
@@ -16,7 +16,12 @@ const login = async (email, password) => {
   return token;
 };
 
-const signup = async ({ email, password, firstName, lastName }) => {
+export const signupService = async ({
+  email,
+  password,
+  firstName,
+  lastName,
+}) => {
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) throw new Error('Email already taken');
 
@@ -26,5 +31,3 @@ const signup = async ({ email, password, firstName, lastName }) => {
     data: { email, password: hashedPassword, firstName, lastName },
   });
 };
-
-export default { signup, login };

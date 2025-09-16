@@ -1,4 +1,4 @@
-import authController from '../controllers/authController.js';
+import authController from '../controllers/loginController.js';
 import { prisma } from '../db/prismaClient.js';
 
 jest.mock('../db/prismaClient.js');

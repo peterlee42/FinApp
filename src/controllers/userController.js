@@ -1,8 +1,8 @@
 import { prisma } from '../db/prismaClient.js';
-import { signUpService } from '../services/authService.js';
+import { signupService } from '../services/authService.js';
 
 // Signup User
-const signup = async (req, res) => {
+const createUser = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   const userExists = await prisma.user.findFirst({
@@ -15,14 +15,7 @@ const signup = async (req, res) => {
   }
 
   try {
-    const result = await prisma.user.create({
-      data: {
-        email,
-        firstName,
-        lastName,
-        password,
-      },
-    });
+    const result = signupService({ email, password, firstName, lastName });
     res.json(result);
   } catch (err) {
     console.error(err);
@@ -83,4 +76,4 @@ const deleteUserById = async (req, res) => {
   }
 };
 
-export default { signup, getAllUsers, getUserById, deleteUserById };
+export default { createUser, getAllUsers, getUserById, deleteUserById };

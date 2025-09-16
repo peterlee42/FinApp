@@ -9,6 +9,9 @@ userRouter.get('/', userController.getAllUsers);
 // get one user
 userRouter.get('/:id', userController.getUserById);
 
+// create a user
+userRouter.post('/create', userController.createUser);
+
 // delete one user
 userRouter.delete('/:id', userController.deleteUserById);
 

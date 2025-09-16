@@ -11,7 +11,7 @@ const getAllGoals = async (_, res) => {
   }
 };
 
-// Get goal by ID
+// Get single goal by ID
 const getGoalById = async (req, res) => {
   const { id } = req.params;
 
@@ -66,6 +66,7 @@ const updateGoal = async (req, res) => {
         target,
         current,
         deadline,
+        updatedAt: new Date(),
       },
     });
     res.json(result);

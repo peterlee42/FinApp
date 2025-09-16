@@ -1,6 +1,6 @@
-import { loginService } from './authService.js';
+import { loginService } from '../services/authService.js';
 
-export const loginController = async (req, res) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const token = await loginService(email, password);
@@ -9,3 +9,5 @@ export const loginController = async (req, res) => {
     res.status(401).json({ error: err.message });
   }
 };
+
+export default { login };

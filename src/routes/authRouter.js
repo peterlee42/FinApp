@@ -1,9 +1,13 @@
 import express from 'express';
-import { loginController, signupController } from '../authController.js';
+import loginController from '../controllers/loginController.js';
 
 const authRouter = express.Router();
 
-authRouter.post('/login', loginController);
-authRouter.post('/signup', signupController);
+// login user
+authRouter.post('/login', loginController.login);
+
+//TODO: email verified auth
+
+//TODO: 2fa auth
 
 export default authRouter;
