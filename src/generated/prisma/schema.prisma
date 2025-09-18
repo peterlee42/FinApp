@@ -16,9 +16,10 @@ model Goal {
   target    Decimal?
   current   Decimal?
   deadline  DateTime?
-  notes     String    @default("")
+  notes     String?   @default("")
 
   @@index([deadline])
+  @@map("goals")
 }
 
 model User {

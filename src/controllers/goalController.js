@@ -1,5 +1,7 @@
 import { prisma } from '../db/prismaClient.js';
 
+//TODO: Make sure only users can access their goals
+
 // Get all goals
 const getAllGoals = async (_, res) => {
   try {
@@ -33,13 +35,12 @@ const getGoalById = async (req, res) => {
 
 // Create a goal
 const createGoal = async (req, res) => {
-  const { name, notes, target, current, deadline } = req.body;
+  const { name, target, current, deadline } = req.body;
 
   try {
     const result = await prisma.goal.create({
       data: {
         name,
-        notes,
         target,
         current,
         deadline,
