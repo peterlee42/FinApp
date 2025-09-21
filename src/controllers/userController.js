@@ -33,7 +33,8 @@ const getAllUsers = async (_, res) => {
   try {
     const users = await prisma.user.findMany({
       select: {
-        name: true,
+        firstName: true,
+        lastName: true,
         email: true,
       },
     });
@@ -50,9 +51,10 @@ const getUserById = async (req, res) => {
     const userID = req.params.id;
 
     const user = await prisma.user.findUnique({
-      where: { userID },
+      where: { id: userID },
       select: {
-        name: true,
+        firstName: true,
+        lastName: true,
         email: true,
       },
     });

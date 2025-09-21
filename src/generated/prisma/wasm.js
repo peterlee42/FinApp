@@ -35,11 +35,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.1
+ * Prisma Client JS version: 6.16.2
  * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
  */
 Prisma.prismaVersion = {
-  client: "6.16.1",
+  client: "6.16.2",
   engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
 }
 
@@ -100,7 +100,8 @@ exports.Prisma.GoalScalarFieldEnum = {
   target: 'target',
   current: 'current',
   deadline: 'deadline',
-  notes: 'notes'
+  notes: 'notes',
+  authorId: 'authorId'
 };
 
 exports.Prisma.UserScalarFieldEnum = {
@@ -174,7 +175,7 @@ const config = {
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
-  "clientVersion": "6.16.1",
+  "clientVersion": "6.16.2",
   "engineVersion": "1c57fdcd7e44b29b9313256c76699e91c3ac3c43",
   "datasourceNames": [
     "db"
@@ -188,13 +189,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Goal {\n  id        String    @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  createdAt DateTime  @default(now())\n  updatedAt DateTime? @updatedAt\n  name      String\n  target    Decimal?\n  current   Decimal?\n  deadline  DateTime?\n  notes     String?   @default(\"\")\n\n  @@index([deadline])\n  @@map(\"goals\")\n}\n\nmodel User {\n  id            String    @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  email         String    @unique\n  firstName     String\n  lastName      String\n  password      String\n  phoneNumber   String?   @unique\n  emailVerified Boolean   @default(false)\n  phoneVerified Boolean   @default(false)\n  dateOfBirth   DateTime?\n  address       String?\n  twoFASecret   String?\n  failedLogins  Int       @default(0)\n  lastLogin     DateTime?\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n\n  @@map(\"users\")\n}\n",
-  "inlineSchemaHash": "255075af519e0d71e1e46018a2480da129fd5ed83d4080513cc2694911dc56f2",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Goal {\n  id        String    @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  createdAt DateTime  @default(now())\n  updatedAt DateTime? @updatedAt\n  name      String\n  target    Decimal?\n  current   Decimal?\n  deadline  DateTime?\n  notes     String?   @default(\"\")\n\n  author   User   @relation(fields: [authorId], references: [id])\n  authorId String @db.Uuid\n\n  @@index([deadline])\n  @@map(\"goals\")\n}\n\nmodel User {\n  id            String    @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  email         String    @unique\n  firstName     String\n  lastName      String\n  password      String\n  phoneNumber   String?   @unique\n  emailVerified Boolean   @default(false)\n  phoneVerified Boolean   @default(false)\n  dateOfBirth   DateTime?\n  address       String?\n  twoFASecret   String?\n  failedLogins  Int       @default(0)\n  lastLogin     DateTime?\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n\n  goals Goal[]\n\n  @@map(\"users\")\n}\n",
+  "inlineSchemaHash": "6541e159bd8ffa40d4d2cefd853833228f9b1444f52a0c470f7360b98e3b588f",
   "copyEngine": false
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Goal\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"target\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"current\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"deadline\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":\"goals\"},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"phoneVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"dateOfBirth\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"twoFASecret\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"failedLogins\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"lastLogin\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"users\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Goal\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"target\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"current\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"deadline\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"GoalToUser\"},{\"name\":\"authorId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":\"goals\"},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"phoneVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"dateOfBirth\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"twoFASecret\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"failedLogins\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"lastLogin\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"goals\",\"kind\":\"object\",\"type\":\"Goal\",\"relationName\":\"GoalToUser\"}],\"dbName\":\"users\"}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = undefined
 config.compilerWasm = undefined

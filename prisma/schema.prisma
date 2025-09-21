@@ -11,12 +11,15 @@ datasource db {
 model Goal {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt DateTime  @default(now())
-  updatedAt  DateTime? @updatedAt
-  name      String
-  target    Decimal?
-  current   Decimal?
-  deadline  DateTime?
-  notes     String?    @default("")
+  updatedAt DateTime? @updatedAt
+  name String
+  target Decimal?
+  current Decimal?
+  deadline DateTime?
+  notes String?    @default("")
+
+  author User @relation(fields: [authorId], references: [id])
+  authorId String @db.Uuid
 
   @@index([deadline]) 
   @@map("goals")
@@ -38,6 +41,8 @@ model User {
   lastLogin      DateTime?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+
+  goals Goal[]
 
   @@map("users")
 }

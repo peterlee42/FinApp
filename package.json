@@ -16,7 +16,10 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node ./src/index.js",
-    "dev": "node --watch ./src/index.js",
+    "dev": "cross-env NODE_ENV=development node --watch ./src/index.js",
+    "prod": "cross-env NODE_ENV=production node ./src/index.js",
+    "dev:migrate": "cross-env NODE_ENV=development prisma migrate dev",
+    "prod:migrate": "cross-env NODE_ENV=production prisma migrate deploy",
     "test": "jest",
     "lint": "eslint . --ext .js",
     "format": "prettier --write ."
@@ -26,7 +29,9 @@
     "@prisma/extension-accelerate": "^2.0.2",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
+    "cross-env": "^10.0.0",
     "dotenv": "^17.2.2",
+    "dotenv-cli": "^10.0.0",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",

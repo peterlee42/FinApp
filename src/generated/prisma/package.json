@@ -1,5 +1,5 @@
 {
-  "name": "prisma-client-c181020c9febf0b8d3e9715cbc1e7545832aa17dc2da01a9bcbaf8af59045605",
+  "name": "prisma-client-9eed5401372f7e5aac6d81931aa6f74e30826d63b5135cdebb39ba49b6cb3cbe",
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "default.js",
@@ -151,7 +151,7 @@
     },
     "./*": "./*"
   },
-  "version": "6.16.1",
+  "version": "6.16.2",
   "sideEffects": false,
   "imports": {
     "#wasm-engine-loader": {

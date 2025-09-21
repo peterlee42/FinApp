@@ -35,9 +35,12 @@ const getGoalById = async (req, res) => {
 
 // Create a goal
 const createGoal = async (req, res) => {
-  const { name, target, current, deadline } = req.body;
+  //TODO: get and validate jwt token and create goal using userId
+  const { name, target, current, deadline, userToken } = req.body;
 
   try {
+    //TODO: verify and decode jwt, extract user (maybe make middleware)
+
     const result = await prisma.goal.create({
       data: {
         name,
