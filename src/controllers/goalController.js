@@ -1,19 +1,8 @@
-import { prisma } from '../db/prismaClient.js';
+import { prisma } from '../config/prismaClient.js';
 
 //TODO: Make sure only users can access their goals
 
-// Get all goals
-const getAllGoals = async (_, res) => {
-  try {
-    const result = await prisma.goal.findMany();
-    res.json(result);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Could not fetch goals' });
-  }
-};
-
-// Get single goal by ID
+// Get goals by user ID
 const getGoalById = async (req, res) => {
   const { id } = req.params;
 
@@ -33,7 +22,7 @@ const getGoalById = async (req, res) => {
   }
 };
 
-// Create a goal
+// Create a goal by user ID
 const createGoal = async (req, res) => {
   //TODO: get and validate jwt token and create goal using userId
   const { name, target, current, deadline, userToken } = req.body;

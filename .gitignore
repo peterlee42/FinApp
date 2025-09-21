@@ -21,6 +21,8 @@ logs
 
 # Environment variables
 .env
+.development.env
+.production.env
 
 # OS files
 .DS_Store

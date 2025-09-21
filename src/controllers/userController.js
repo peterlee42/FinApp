@@ -1,4 +1,4 @@
-import { prisma } from '../db/prismaClient.js';
+import { prisma } from '../config/prismaClient.js';
 import { signupService } from '../services/authService.js';
 
 // Signup User
@@ -82,5 +82,7 @@ const deleteUserById = async (req, res) => {
     res.json(err);
   }
 };
+
+const getUseGoalsById = async (req, res) => {};
 
 export default { createUser, getAllUsers, getUserById, deleteUserById };

@@ -1,4 +1,4 @@
-import env from '../config/env.js';
+import env from './env.js';
 import { PrismaClient } from '../generated/prisma/index.js';
 import { withAccelerate } from '@prisma/extension-accelerate';
 
