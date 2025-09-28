@@ -22,13 +22,15 @@ export const userExtractor = async (req, res, next) => {
   try {
     const decodedToken = jwt.verify(req.token, env.JWT_SECRET);
 
-    if (!decodedToken.id) {
+    if (!decodedToken.userId) {
       return res.status(401).json({ error: 'token invalid' });
     }
 
-    const user = await prisma.user.findUnique({ where: { id: req.userId } });
+    const user = await prisma.user.findUnique({
+      where: { id: decodedToken.userId },
+    });
 
-    if (!req.user) {
+    if (!user) {
       return res.status(401).json({ error: 'userId missing or not valid' });
     }
     req.user = user;

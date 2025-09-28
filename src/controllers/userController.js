@@ -3,7 +3,7 @@ import { signupService } from '../services/authService.js';
 
 // Signup User
 const createUser = async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, phoneNumber } = req.body;
 
   const userExists = await prisma.user.findFirst({
     where: { email },
@@ -20,6 +20,7 @@ const createUser = async (req, res) => {
       password,
       firstName,
       lastName,
+      phoneNumber,
     });
     res.json(result);
   } catch (err) {
