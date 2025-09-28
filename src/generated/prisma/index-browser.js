@@ -124,12 +124,12 @@ exports.Prisma.GoalScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  name: 'name',
+  title: 'title',
   target: 'target',
   current: 'current',
   deadline: 'deadline',
   notes: 'notes',
-  authorId: 'authorId'
+  userId: 'userId'
 };
 
 exports.Prisma.UserScalarFieldEnum = {

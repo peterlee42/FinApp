@@ -1,11 +1,4 @@
-import { config } from 'dotenv';
-
-const envFile =
-  process.env.NODE_ENV === 'development'
-    ? '.development.env'
-    : '.production.env';
-
-config({ path: envFile });
+import 'dotenv/config';
 
 // Errors if env constants are undefined
 if (!process.env.PORT) throw new Error('PORT is not defined');

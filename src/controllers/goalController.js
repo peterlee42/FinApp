@@ -1,14 +1,31 @@
-import { prisma } from '../config/prismaClient.js';
+import prisma from '../config/prismaClient.js';
 
-//TODO: Make sure only users can access their goals
+const getAllGoals = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const goal = await prisma.goal.findMany({
+      where: { userId: userId },
+    });
+
+    if (!goal) {
+      return res.status(404).json({ error: 'Goal not found' });
+    }
+
+    res.json(goal);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch goal' });
+  }
+};
 
 // Get goals by user ID
 const getGoalById = async (req, res) => {
-  const { id } = req.params;
+  const { userId, goalId } = req.body;
 
   try {
     const goal = await prisma.goal.findUnique({
-      where: { id },
+      where: { id: goalId, userId },
     });
 
     if (!goal) {
@@ -24,18 +41,16 @@ const getGoalById = async (req, res) => {
 
 // Create a goal by user ID
 const createGoal = async (req, res) => {
-  //TODO: get and validate jwt token and create goal using userId
-  const { name, target, current, deadline, userToken } = req.body;
+  const { name, target, current, deadline, userId } = req.body;
 
   try {
-    //TODO: verify and decode jwt, extract user (maybe make middleware)
-
     const result = await prisma.goal.create({
       data: {
         name,
         target,
         current,
         deadline,
+        userId,
       },
     });
     res.json(result);
@@ -48,11 +63,11 @@ const createGoal = async (req, res) => {
 // Update a goal
 const updateGoal = async (req, res) => {
   const { id } = req.params;
-  const { name, notes, target, current, deadline } = req.body;
+  const { name, notes, target, current, deadline, userId } = req.body;
 
   try {
     const result = await prisma.goal.update({
-      where: { id },
+      where: { id, userId },
       data: {
         name,
         notes,
@@ -60,6 +75,7 @@ const updateGoal = async (req, res) => {
         current,
         deadline,
         updatedAt: new Date(),
+        userId,
       },
     });
     res.json(result);

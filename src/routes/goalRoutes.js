@@ -1,21 +1,24 @@
 import goalController from '../controllers/goalController.js';
+import { tokenExtractor } from '../middleware/authMiddleware.js';
 import express from 'express';
 
 const goalRouter = express.Router();
 
+goalRouter.use(tokenExtractor);
+
+// Get all goals
+goalRouter.get('/', goalController.getAllGoals);
+
+// Get all goals by goalId
+goalRouter.get('/:id', goalController.getGoalById);
+
 // Create goal
 goalRouter.post(`/create`, goalController.createGoal);
 
-// Get all goals by goal ID
-goalRouter.get('/', goalController.getAllGoals);
-
-// Get all goals by goal ID
-goalRouter.get('/:id', goalController.getGoalById);
-
-// update goal by goal ID
+// Update goal
 goalRouter.put('/:id', goalController.updateGoal);
 
-// Delete a goal by goal ID
+// Delete a goal
 goalRouter.delete('/:id', goalController.deleteGoal);
 
 export default goalRouter;

@@ -16,10 +16,10 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node ./src/index.js",
-    "dev": "cross-env NODE_ENV=development node --watch ./src/index.js",
-    "prod": "cross-env NODE_ENV=production node ./src/index.js",
-    "dev:migrate": "cross-env NODE_ENV=development prisma migrate dev",
-    "prod:migrate": "cross-env NODE_ENV=production prisma migrate deploy",
+    "dev": "dotenv -e .env.development -- node --watch ./src/index.js",
+    "prod": "dotenv -e .env.production -- node ./src/index.js",
+    "dev:migrate": "dotenv -e .env.development -- prisma migrate dev",
+    "prod:migrate": "dotenv -e .env.production -- prisma migrate deploy",
     "test": "jest",
     "lint": "eslint . --ext .js",
     "format": "prettier --write ."

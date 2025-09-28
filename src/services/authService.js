@@ -1,4 +1,4 @@
-import { prisma } from '../config/prismaClient.js';
+import prisma from '../config/prismaClient.js';
 import config from '../config/env.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -16,12 +16,9 @@ export const loginService = async (email, password) => {
   return token;
 };
 
-export const signupService = async ({
-  email,
-  password,
-  firstName,
-  lastName,
-}) => {
+export const signupService = async (fields) => {
+  const { email, password, firstName, lastName } = fields;
+
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) throw new Error('Email already taken');
 
@@ -30,6 +27,6 @@ export const signupService = async ({
   const result = await prisma.user.create({
     data: { email, password: hashedPassword, firstName, lastName },
   });
-  console.log(result);
+
   return result;
 };

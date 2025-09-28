@@ -1,8 +1,8 @@
 import express from 'express';
 import helmet from 'helmet';
-import authRouter from './routes/authRouter.js';
-import userRouter from './routes/userRouter.js';
-import goalRouter from './routes/goalRouter.js';
+import authRouter from './routes/authRoutes.js';
+import userRouter from './routes/userRoutes.js';
+import goalRouter from './routes/goalRoutes.js';
 
 const app = express();
 
