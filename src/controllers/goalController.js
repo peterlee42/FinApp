@@ -41,13 +41,13 @@ const getGoalById = async (req, res) => {
 
 // Create a goal by user ID
 const createGoal = async (req, res) => {
-  const { name, target, current, deadline } = req.body;
+  const { title, target, current, deadline } = req.body;
   const { userId } = req.params;
 
   try {
     const result = await prisma.goal.create({
       data: {
-        name,
+        title,
         target,
         current,
         deadline,
@@ -61,28 +61,32 @@ const createGoal = async (req, res) => {
   }
 };
 
-// Update a goal
-const updateGoal = async (req, res) => {
+// Add money
+const addMoney = async (req, res) => {
   const { goalId, userId } = req.params;
-  const { name, notes, target, current, deadline } = req.body;
+  const { amount } = req.body;
 
   try {
     const result = await prisma.goal.update({
       where: { id: goalId, userId },
-      data: {
-        name,
-        notes,
-        target,
-        current,
-        deadline,
-        updatedAt: new Date(),
-        userId,
-      },
+      data: {},
     });
     res.json(result);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to update goal' });
+    res.status(500).json({ error: 'Failed to add money' });
+  }
+};
+
+// Withdraw
+const withdraw = async (req, res) => {
+  const { goalId, userId } = req.params;
+  const { amount } = req.body;
+
+  try {
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Failed to withdraw' });
   }
 };
 
