@@ -1,6 +1,7 @@
+// prisma/schema.prisma
+
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -8,24 +9,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Goal {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-  title String @db.VarChar(20)
-  target Decimal?
-  current Decimal?
-  deadline DateTime?
-  notes String?    @default("")
-
-  // ******Relationships*************
-  user User @relation(fields: [userId], references: [id])
-  userId String @db.Uuid
-
-  // ******Configs*************
-  @@index([deadline]) 
-  @@map("goals")
-}
+// =======================
+// MODELS
+// =======================
 
 model User {
   id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
@@ -36,17 +22,107 @@ model User {
   phoneNumber    String?  @unique
   emailVerified  Boolean  @default(false)
   phoneVerified  Boolean  @default(false)
-  dateOfBirth    DateTime?
-  address        String?
-  twoFASecret    String?  
+  twoFASecret    String?
   failedLogins   Int      @default(0)
   lastLogin      DateTime?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
   // ******Relationships*************
-  goals Goal[]
+  accounts      Account[]
+  transactions  Transaction[]
+  budgets       Budget[]
+  goals         Goal[]
 
   // ******Configs*************
   @@map("users")
+}
+
+model Account {
+  id           String         @id @default(cuid())
+  name         String
+  type         AccountType
+  balance      Decimal        @default(0.0)
+  currency     String          @default("USD")
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  userId       String
+  user         User            @relation(fields: [userId], references: [id])
+
+  transactions Transaction[]
+}
+
+model Transaction {
+  id            String        @id @default(cuid())
+  description   String
+  amount        Decimal
+  type          TransactionType
+  date          DateTime      @default(now())
+
+  categoryId    String?
+  category      Category?     @relation(fields: [categoryId], references: [id])
+
+  accountId     String
+  account       Account       @relation(fields: [accountId], references: [id])
+
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id            String         @id @default(cuid())
+  name          String
+  type          CategoryType   // INCOME or EXPENSE
+  icon          String?
+  color         String?
+  createdAt     DateTime       @default(now())
+
+  transactions  Transaction[]
+  budgets       Budget[]
+}
+
+
+model Goal {
+  id            String         @id @default(cuid())
+  name          String
+  targetAmount  Decimal
+  currentAmount Decimal         @default(0.0)
+  deadline      DateTime?
+  priority      GoalPriority    @default(MEDIUM)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  achieved      Boolean         @default(false)
+
+  userId        String
+  user          User            @relation(fields: [userId], references: [id])
+}
+
+// =======================
+// ENUMS
+// =======================
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  TRANSFER
+}
+
+enum CategoryType {
+  INCOME
+  EXPENSE
+}
+
+enum AccountType {
+  CASH
+  BANK
+  CREDIT_CARD
+  INVESTMENT
+  OTHER
+}
+
+enum GoalPriority {
+  HIGH
+  MEDIUM
+  LOW
 }
