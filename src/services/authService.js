@@ -17,7 +17,7 @@ export const loginService = async (email, password) => {
 };
 
 export const signupService = async (fields) => {
-  const { email, password, firstName, lastName } = fields;
+  const { email, password, firstName, lastName, phoneNumber } = fields;
 
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) throw new Error('Email already taken');
@@ -25,7 +25,14 @@ export const signupService = async (fields) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const result = await prisma.user.create({
-    data: { email, password: hashedPassword, firstName, lastName },
+    data: { email, password: hashedPassword, firstName, lastName, phoneNumber },
+    select: {
+      id: true,
+      email: true,
+      firstName: true,
+      lastName: true,
+      phoneNumber: true,
+    },
   });
 
   return result;
