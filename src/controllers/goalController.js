@@ -1,6 +1,6 @@
 import prisma from '../config/prismaClient.js';
 
-const getAllGoals = async (req, res) => {
+const getAllGoals = async (req, res, next) => {
   const { userId } = req.params;
 
   try {
@@ -14,13 +14,12 @@ const getAllGoals = async (req, res) => {
 
     res.json(goal);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to fetch goal' });
+    next(err);
   }
 };
 
 // Get goals by user ID
-const getGoalById = async (req, res) => {
+const getGoalById = async (req, res, next) => {
   const { userId, goalId } = req.params;
 
   try {
@@ -34,13 +33,12 @@ const getGoalById = async (req, res) => {
 
     res.json(goal);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to fetch goal' });
+    next(err);
   }
 };
 
 // Create a goal by user ID
-const createGoal = async (req, res) => {
+const createGoal = async (req, res, next) => {
   const { title, target, current, deadline } = req.body;
   const { userId } = req.params;
 
@@ -56,13 +54,12 @@ const createGoal = async (req, res) => {
     });
     res.json(result);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create goal' });
+    next(err);
   }
 };
 
 // Add money
-const addMoney = async (req, res) => {
+const addMoney = async (req, res, next) => {
   const { goalId, userId } = req.params;
   const { amount } = req.body;
 
@@ -73,25 +70,34 @@ const addMoney = async (req, res) => {
     });
     res.json(result);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to add money' });
+    next(err);
   }
 };
 
 // Withdraw
-const withdraw = async (req, res) => {
+const withdraw = async (req, res, next) => {
   const { goalId, userId } = req.params;
   const { amount } = req.body;
 
   try {
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: 'Failed to withdraw' });
+    next(err);
+  }
+};
+
+// Update goal
+const updateGoal = async (req, res, next) => {
+  const { goalId, userId } = req.params;
+  const { amount } = req.body;
+
+  try {
+  } catch (err) {
+    next(err);
   }
 };
 
 // Delete a goal
-const deleteGoal = async (req, res) => {
+const deleteGoal = async (req, res, next) => {
   const { userId, goalId } = req.params;
 
   try {
@@ -100,8 +106,7 @@ const deleteGoal = async (req, res) => {
     });
     res.json({ message: 'Goal deleted successfully' });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to delete goal' });
+    next(err);
   }
 };
 
