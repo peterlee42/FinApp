@@ -19,6 +19,10 @@ goalRouter.get('/:id', goalController.getGoalById);
 // Create goal
 goalRouter.post(`/create`, goalController.createGoal);
 
+// Add money
+
+// Withdraw money
+
 // Update goal
 goalRouter.put('/:id', goalController.updateGoal);
 

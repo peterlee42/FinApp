@@ -1,59 +1,37 @@
-import prisma from '../config/prismaClient.js';
+import goalService from '../services/goalService.js';
 
-const getAllGoals = async (req, res) => {
+const getAllGoals = async (req, res, next) => {
   const { userId } = req.params;
 
   try {
-    const goal = await prisma.goal.findMany({
-      where: { userId: userId },
-    });
-
-    if (!goal) {
-      return res.status(404).json({ error: 'Goal not found' });
-    }
-
-    res.json(goal);
+    const goalsArray = goalService.getAllGoals(userId);
+    res.json(goalsArray);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to fetch goal' });
+    next(err);
   }
 };
 
 // Get goals by user ID
-const getGoalById = async (req, res) => {
+const getGoalById = async (req, res, next) => {
   const { userId, goalId } = req.params;
 
   try {
-    const goal = await prisma.goal.findUnique({
-      where: { id: goalId, userId },
-    });
-
-    if (!goal) {
-      return res.status(404).json({ error: 'Goal not found' });
-    }
-
+    const goal = await goalService.getGoalById(userId, goalId);
     res.json(goal);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to fetch goal' });
+    next(err);
   }
 };
 
 // Create a goal by user ID
 const createGoal = async (req, res) => {
-  const { title, target, current, deadline } = req.body;
+  const { title, target, current } = req.body;
   const { userId } = req.params;
 
   try {
-    const result = await prisma.goal.create({
-      data: {
-        title,
-        target,
-        current,
-        deadline,
-        userId,
-      },
-    });
+    const result = await goalService.createGoal(title, target, current, userId);
     res.json(result);
   } catch (err) {
     console.error(err);
@@ -62,46 +40,45 @@ const createGoal = async (req, res) => {
 };
 
 // Add money
-const addMoney = async (req, res) => {
+const addMoney = async (req, res, next) => {
   const { goalId, userId } = req.params;
   const { amount } = req.body;
 
   try {
-    const result = await prisma.goal.update({
-      where: { id: goalId, userId },
-      data: {},
-    });
-    res.json(result);
+    const result = await goalService.addMoney(goalId, userId, amount);
+    res.status(200).json(result);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to add money' });
+    next(err);
   }
 };
 
 // Withdraw
-const withdraw = async (req, res) => {
+const withdraw = async (req, res, next) => {
   const { goalId, userId } = req.params;
   const { amount } = req.body;
 
   try {
+    const result = await goalService.withdraw(goalId, userId, amount);
+    res.status(200).json(result);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'Failed to withdraw' });
+    next(err);
   }
 };
 
+// TODO: Finish goal controller
+// Update a goal
+const updateGoal = async (req, res, next) => {};
+
 // Delete a goal
-const deleteGoal = async (req, res) => {
+const deleteGoal = async (req, res, next) => {
   const { userId, goalId } = req.params;
 
   try {
-    await prisma.goal.delete({
-      where: { id: goalId, userId },
-    });
-    res.json({ message: 'Goal deleted successfully' });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to delete goal' });
+    next(err);
   }
 };
 
@@ -109,6 +86,8 @@ export default {
   getAllGoals,
   getGoalById,
   createGoal,
+  addMoney,
+  withdraw,
   updateGoal,
   deleteGoal,
 };
