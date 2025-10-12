@@ -1,19 +1,13 @@
-import prisma from '../config/prismaClient.js';
+import goalService from '../services/goalService.js';
 
 const getAllGoals = async (req, res, next) => {
   const { userId } = req.params;
 
   try {
-    const goal = await prisma.goal.findMany({
-      where: { userId: userId },
-    });
-
-    if (!goal) {
-      return res.status(404).json({ error: 'Goal not found' });
-    }
-
-    res.json(goal);
+    const goalsArray = goalService.getAllGoals(userId);
+    res.json(goalsArray);
   } catch (err) {
+    console.error(err);
     next(err);
   }
 };
@@ -23,35 +17,21 @@ const getGoalById = async (req, res, next) => {
   const { userId, goalId } = req.params;
 
   try {
-    const goal = await prisma.goal.findUnique({
-      where: { id: goalId, userId },
-    });
-
-    if (!goal) {
-      return res.status(404).json({ error: 'Goal not found' });
-    }
-
+    const goal = await goalService.getGoalById(userId, goalId);
     res.json(goal);
   } catch (err) {
+    console.error(err);
     next(err);
   }
 };
 
 // Create a goal by user ID
-const createGoal = async (req, res, next) => {
-  const { title, target, current, deadline } = req.body;
+const createGoal = async (req, res) => {
+  const { title, target, current } = req.body;
   const { userId } = req.params;
 
   try {
-    const result = await prisma.goal.create({
-      data: {
-        title,
-        target,
-        current,
-        deadline,
-        userId,
-      },
-    });
+    const result = await goalService.createGoal(title, target, current, userId);
     res.json(result);
   } catch (err) {
     next(err);
@@ -64,12 +44,10 @@ const addMoney = async (req, res, next) => {
   const { amount } = req.body;
 
   try {
-    const result = await prisma.goal.update({
-      where: { id: goalId, userId },
-      data: {},
-    });
-    res.json(result);
+    const result = await goalService.addMoney(goalId, userId, amount);
+    res.status(200).json(result);
   } catch (err) {
+    console.error(err);
     next(err);
   }
 };
@@ -80,32 +58,25 @@ const withdraw = async (req, res, next) => {
   const { amount } = req.body;
 
   try {
+    const result = await goalService.withdraw(goalId, userId, amount);
+    res.status(200).json(result);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
 
-// Update goal
-const updateGoal = async (req, res, next) => {
-  const { goalId, userId } = req.params;
-  const { amount } = req.body;
-
-  try {
-  } catch (err) {
-    next(err);
-  }
-};
+// TODO: Finish goal controller
+// Update a goal
+const updateGoal = async (req, res, next) => {};
 
 // Delete a goal
 const deleteGoal = async (req, res, next) => {
   const { userId, goalId } = req.params;
 
   try {
-    await prisma.goal.delete({
-      where: { id: goalId, userId },
-    });
-    res.json({ message: 'Goal deleted successfully' });
   } catch (err) {
+    console.error(err);
     next(err);
   }
 };
@@ -114,6 +85,8 @@ export default {
   getAllGoals,
   getGoalById,
   createGoal,
+  addMoney,
+  withdraw,
   updateGoal,
   deleteGoal,
 };

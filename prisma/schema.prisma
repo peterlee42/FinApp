@@ -87,7 +87,7 @@ model Goal {
   id            String         @id @default(cuid())
   title         String
   targetAmount  Decimal
-  currentAmount Decimal         @default(0.0)
+  currentAmount Decimal         @default(0.0) @db.Decimal(19, 2)
   priority      GoalPriority    @default(MEDIUM)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
