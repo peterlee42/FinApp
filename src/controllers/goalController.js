@@ -34,8 +34,7 @@ const createGoal = async (req, res) => {
     const result = await goalService.createGoal(title, target, current, userId);
     res.json(result);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create goal' });
+    next(err);
   }
 };
 
