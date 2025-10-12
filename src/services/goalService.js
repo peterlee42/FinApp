@@ -171,7 +171,7 @@ const withdraw = async (goalId, userId, amount) => {
   };
 };
 
-//TODO: new target amont less than current amount, new current amount greater than target amount, etc
+//TODO: new target amount less than current amount, new current amount greater than target amount, etc
 const updateGoal = async () => {};
 
 const deleteGoal = async (goalId, userId) => {
