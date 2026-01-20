@@ -14,87 +14,81 @@ datasource db {
 // =======================
 
 model User {
-  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email          String   @unique
-  firstName      String
-  lastName       String
-  password       String
-  phoneNumber    String?  @unique
-  emailVerified  Boolean  @default(false)
-  phoneVerified  Boolean  @default(false)
-  twoFASecret    String?
-  failedLogins   Int      @default(0)
-  lastLogin      DateTime?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email         String    @unique
+  firstName     String
+  lastName      String
+  password      String
+  emailVerified Boolean   @default(false)
+  failedLogins  Int       @default(0)
+  lastLogin     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   // ******Relationships*************
-  accounts      Account[]
-  transactions  Transaction[]
-  budgets       Budget[]
-  goals         Goal[]
+  accounts Account[]
+  goals    Goal[]
 
   // ******Configs*************
   @@map("users")
 }
 
 model Account {
-  id           String         @id @default(cuid())
-  name         String
-  type         AccountType
-  balance      Decimal        @default(0.0)
-  currency     String          @default("USD")
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
+  id        String      @id @default(cuid())
+  name      String
+  type      AccountType
+  balance   Decimal     @default(0.0)
+  currency  Currency    @default(CAD)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 
-  userId       String
-  user         User            @relation(fields: [userId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // ******Relationships*************
+  transactions Transaction[]
+
+  // ******Configs*************
+  @@map("accounts")
+}
+
+model Category {
+  id        String          @id @default(cuid())
+  name      String
+  type      TransactionType
+  icon      String?
+  color     String?
+  createdAt DateTime        @default(now())
 
   transactions Transaction[]
 }
 
 model Transaction {
-  id            String        @id @default(cuid())
-  description   String
-  amount        Decimal
-  type          TransactionType
-  date          DateTime      @default(now())
+  id          String          @id @default(cuid())
+  description String
+  amount      Decimal
+  type        TransactionType
+  date        DateTime        @default(now())
 
-  categoryId    String?
-  category      Category?     @relation(fields: [categoryId], references: [id])
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
 
-  accountId     String
-  account       Account       @relation(fields: [accountId], references: [id])
-
-  userId        String
-  user          User          @relation(fields: [userId], references: [id])
+  accountId String
+  account   Account @relation(fields: [accountId], references: [id])
 }
-
-model Category {
-  id            String         @id @default(cuid())
-  name          String
-  type          CategoryType   // INCOME or EXPENSE
-  icon          String?
-  color         String?
-  createdAt     DateTime       @default(now())
-
-  transactions  Transaction[]
-  budgets       Budget[]
-}
-
 
 model Goal {
-  id            String         @id @default(cuid())
+  id            String       @id @default(cuid())
   title         String
   targetAmount  Decimal
-  currentAmount Decimal         @default(0.0) @db.Decimal(19, 2)
-  priority      GoalPriority    @default(MEDIUM)
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  achieved      Boolean         @default(false)
+  currentAmount Decimal      @default(0.0) @db.Decimal(19, 2)
+  priority      GoalPriority @default(MEDIUM)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  achieved      Boolean      @default(false)
 
-  userId        String
-  user          User            @relation(fields: [userId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 // =======================
@@ -107,15 +101,11 @@ enum TransactionType {
   TRANSFER
 }
 
-enum CategoryType {
-  INCOME
-  EXPENSE
-}
-
 enum AccountType {
   CASH
-  BANK
-  CREDIT_CARD
+  DEBIT
+  CREDIT
+  SAVINGS
   INVESTMENT
   OTHER
 }
@@ -124,4 +114,21 @@ enum GoalPriority {
   HIGH
   MEDIUM
   LOW
+}
+
+enum BudgetFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+enum Currency {
+  CAD
+  USD
+  EUR
+  GBP
+  AUD
+  JPY
+  KRW
 }
