@@ -11,5 +11,5 @@ export default [
       ecmaVersion: 'latest',
     },
   },
-  { ignores: ['dist/**'] },
+  { ignores: ['dist/**', 'prisma/**', 'src/generated/**'] },
 ];

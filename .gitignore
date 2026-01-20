@@ -34,3 +34,7 @@ build/
 
 # Optional npm cache
 .npm
+
+# Editor
+.vscode/
+.idea/

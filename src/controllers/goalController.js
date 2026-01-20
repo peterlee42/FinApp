@@ -26,7 +26,7 @@ const getGoalById = async (req, res, next) => {
 };
 
 // Create a goal by user ID
-const createGoal = async (req, res) => {
+const createGoal = async (req, res, next) => {
   const { title, target, current } = req.body;
   const { userId } = req.params;
 
